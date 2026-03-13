@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Planning</title>
+    <style>
+        *{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.container{
+    border: 1px solid grey;
+    border-radius: 10px;
+    max-width: 1200px;
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+    margin: 40px;
+    padding: 20px;
+}
+
+.input-group{
+    background-color: lightgray;
+    padding: 10px;
+    margin: 5px;
+}
+button{
+    cursor: pointer;
+    background-color: green;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 2px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Monthly Budget Planner</h2>
+        <!--Monthly Income-->
+        <div class="input-group">
+            <h3>Monthly Income</h3>
+            <input type="number" id="salaryInput" placeholder="Enter Salary">
+            <button onclick="addSalary()">Add Salary</button>
+        </div>
+
+
+        <!--expenses-->
+
+        <div class="input-group">
+            <h3>Monthly Expenses</h3>
+            <!--Rent and utilities-->
+            <div class="expence-catagory">
+                <h4>Housing</h4>
+                <input type="number" id="rentInput" placeholder="Rent/Mortgage">
+                <button onclick="addRent()">Add Rent</button>
+                <br>
+                <input type="number" id="utilitiesInput" placeholder="Utilities">
+                <button onclick="addUtilities()">Add Utilities</button>
+
+            </div>
+
+            <div class="expense-catagory">
+                <h4>Daily Living</h4>
+                <input type="number" id="groceriesInput" placeholder="Groceries">
+                <button onclick="addGroceries()">Add Groceries</button>
+                <br>
+                <input type="number" id="transportationInput" placeholder="Transportation">
+                <button onclick="addTransportation()">Add Transportation</button>
+            </div> 
+
+            <div class="expence-catagory">
+                <h4>Other Expenses</h4>
+                <input type="number" id="entertainmentInput" placeholder="Entertainment">
+                <button onclick="addEntertainment()">Add Entertainment</button>
+                <br>
+                <input type="number" id="miscInput" placeholder="Miscellaneous">
+                <button onclick="addMisc()">Add Misc</button>
+            </div>
+            <!---->
+        </div>
+
+
+        <!--summary of monthly income including expences-->
+        <div class="summary">
+            <h3>Monthly Summary</h3>
+            <p>Total Income : $<span id="totalIncome">0</span></p>
+            <p>Monthly rent: $ <span id="rentExpenses">0</span></p>
+            <p>Monthly Utilities: $ <span id="utilitiesExpenses">0</span></p>
+            <p>Monthly Groceries: $ <span id="groceriesExpenses">0</span></p>
+            <p>Monthly Transportation: $ <span id="transportationExpenses">0</span></p>
+        </div>
+
+        <div class="yearly-summary">
+            <h3>Yearly Projections</h3>
+            <p>Yearly Income: $ <span id="yearlyIncome">0</span></p>
+            <p>Yearly Rent: $ <span id="yearlyRent">0</span></p>
+            <p>Yearly Utilities: $ <span id="yearlyUtilities">0</span></p>
+            <p>Yearly Groceries: $ <span id="yearlyGroceries">0</span></p>
+            <p>Yearly Transportation: $ <span id="yearlyTransportation">0</span></p>
+        </div>
+    </div>
+    <script>
+        //Global Varables
+
+let totalIncome=0;
+let rentExpenses=0;
+let utilitiesExpenses=0
+let groceriesExpenses=0
+let transportationExpenses=0
+
+//Add Salary ()
+
+function addSalary() {
+    let salaryInput = document.getElementById("salaryInput");
+
+    let salary=Number(salaryInput.value);
+    console.log(salary);
+    console.log(typeof salary); //show the data type
+    totalIncome = salary
+    updateSummary();
+}
+//Add rent function
+function addRent(){
+    let rentInput=document.getElementById('rentInput');
+    let rent=Number(rentInput.value);
+    console.log(rent);
+    rentExpenses=rent;
+    updateSummary()
+}
+
+function addUtilities(){
+    let utilitiesInput=document.getElementById('utilitiesInput');
+    let Utilities=Number(utilitiesInput.value);
+    console.log(Utilities);
+    utilitiesExpenses = Utilities;
+    updateSummary();
+}
+
+function addGroceries(){
+    let groceriesInput=document.getElementById('groceriesInput');
+    let groceries=Number(groceriesInput.value);
+    console.log(groceries);
+    updateSummary();
+}
+
+function addTransportation(){
+    let transportationInput=document.getElementById('transportationInput');
+    let transportation=Number(transportationInput.value);
+    console.log(transportation);
+    updateSummary();
+}
+
+function updateSummary() {
+    //monthly income
+    document.getElementById('totalIncome').innerHTML = totalIncome;
+    document.getElementById('rentExpenses').innerHTML = rentExpenses;
+    document.getElementById('utilitiesExpenses').innerHTML = utilitiesExpenses;
+    document.getElementById('groceriesExpenses').innerHTML = groceriesExpenses;
+    document.getElementById('transportationExpenses').innerHTML = transportationExpenses;
+
+    //update yearly projections
+    document.getElementById('yearlyIncome').innerHTML = totalIncome * 12;
+    document.getElementById('yearlyRent').innerHTML = rentExpenses*12;
+    document.getElementById('yearlyUtilities').innerHTML = utilitiesExpenses*12;
+    document.getElementById('yearlyGroceries').innerHTML = groceriesExpenses*12;
+    document.getElementById('yearlyTransportation').innerHTML = transportationExpenses*12;
+}
+    </script>
+</body>
+</html>
